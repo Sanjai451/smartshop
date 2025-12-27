@@ -1,29 +1,30 @@
 package com.smartshop.SmartShop.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.Set;
-
-@Entity
 @Data
-@Table(name = "users")
+@Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
-    private String name;
-
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    private String password;
-
-    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // getters & setters
+    public void setName(@NotBlank(message = "Name is required") String name) {
+    }
+
+    public void setEmail(@Email(message = "Invalid email format") @NotBlank(message = "Email is required") String email) {
+    }
+
+    public void setPassword(@Size(min = 8, message = "Password must be at least 6 characters") String password) {
+
+    }
 }
+

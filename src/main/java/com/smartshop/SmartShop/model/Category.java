@@ -15,5 +15,5 @@ public class Category {
     private Long catId;
 
     private String catName;
-
 }
+
