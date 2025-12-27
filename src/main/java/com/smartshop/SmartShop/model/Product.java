@@ -1,7 +1,9 @@
 package com.smartshop.SmartShop.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 public class Product {
 
@@ -18,7 +20,7 @@ public class Product {
     private Integer prodQuantity;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
 }
+
