@@ -23,7 +23,7 @@ public class productController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    // ---------------- ADD PRODUCT ----------------
+    // ADD PRODUCT
     @PostMapping(consumes = "application/json")
     public productDTO addProduct(@Valid @RequestBody productDTO dto) {
 
@@ -41,7 +41,7 @@ public class productController {
         return convertToDTO(productRepository.save(product));
     }
 
-    // ---------------- GET ALL PRODUCTS ----------------
+    // GET ALL PRODUCTS
     @GetMapping
     public List<productDTO> getAllProducts() {
         return productRepository.findAll()
@@ -50,7 +50,7 @@ public class productController {
                 .collect(Collectors.toList());
     }
 
-    // ---------------- GET PRODUCT BY ID ----------------
+    // GET PRODUCT BY ID
     @GetMapping("/{id}")
     public productDTO getProductById(@PathVariable Long id) {
         Product product = productRepository.findById(id)
@@ -59,7 +59,7 @@ public class productController {
         return convertToDTO(product);
     }
 
-    // ---------------- SEARCH PRODUCT BY NAME ----------------
+    // SEARCH PRODUCT BY NAME
     @GetMapping("/search")
     public List<productDTO> getProductByName(@RequestParam String name) {
         return productRepository.findByProductName(name)
@@ -68,7 +68,7 @@ public class productController {
                 .collect(Collectors.toList());
     }
 
-    // ---------------- GET PRODUCTS BY CATEGORY ID ----------------
+    // GET PRODUCTS BY CATEGORY ID
     @GetMapping("/category/{catId}")
     public List<productDTO> getProductsByCategoryId(@PathVariable Long catId) {
 
@@ -78,7 +78,7 @@ public class productController {
                 .collect(Collectors.toList());
     }
 
-    // ---------------- DELETE PRODUCT BY ID ----------------
+    // DELETE PRODUCT BY ID
     @DeleteMapping("/{id}")
     public String deleteProductById(@PathVariable Long id) {
 
@@ -91,7 +91,7 @@ public class productController {
     }
 
 
-    // ---------------- DTO MAPPER ----------------
+    // DTO MAPPER
     private productDTO convertToDTO(Product product) {
         productDTO dto = new productDTO();
         dto.setProductId(product.getProductId());

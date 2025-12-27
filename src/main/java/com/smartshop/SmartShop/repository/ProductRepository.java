@@ -13,29 +13,27 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    // 🔍 Search by product name (case-insensitive)
     @Query("""
            SELECT p FROM Product p
            WHERE LOWER(p.productName) LIKE LOWER(CONCAT('%', :name, '%'))
            """)
     List<Product> findByProductName(@Param("name") String name);
 
-    // 📦 Products by category ID
     @Query("""
            SELECT p FROM Product p
            WHERE p.category.catId = :catId
            """)
     List<Product> findProductsByCategoryId(@Param("catId") Long catId);
 
-    // ✅ Check existence by name
     @Query("""
            SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END
            FROM Product p
            WHERE LOWER(p.productName) = LOWER(:name)
            """)
+
+
     boolean existsByProductNameIgnoreCase(@Param("name") String name);
 
-    // 🗑 Delete by product name
     @Modifying
     @Transactional
     @Query("""
