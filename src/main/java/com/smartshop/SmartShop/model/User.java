@@ -23,7 +23,7 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    private Role role;
 
     // getters & setters
 }
