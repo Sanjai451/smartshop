@@ -16,5 +16,4 @@ public class Category {
 
     private String catName;
 
-    // getters & setters
 }
